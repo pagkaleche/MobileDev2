@@ -11,29 +11,31 @@ registerRootComponent(App);
 export default function App() {
   const [gameEntities, setGameEntities] = useState(entities());
 
-  const handleTouch = () => {
-    const newCircle = gameEntities.addCircle();
+  // const handleTouch = () => {
+  //   const newCircle = gameEntities.addCircle();
 
-    setGameEntities((prevEntities) => {
-      const updatedEntities = {
-        ...prevEntities,
-        [`Circle_${Date.now()}`]: newCircle,
-      };
-      console.log(updatedEntities);
-      return updatedEntities;
-    });
-  };
+  //   setGameEntities((prevEntities) => {
+  //     const updatedEntities = {
+  //       ...prevEntities,
+  //       [`Circle_${Date.now()}`]: newCircle,
+  //     };
+  //     console.log(updatedEntities);
+  //     return updatedEntities;
+  //   });
+  // };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={{ flex: 1 }} activeOpacity={1} onPress={handleTouch}>
-        <GameEngine
-          systems={[Physics]}
-          entities={gameEntities}
-        >
-          <StatusBar style="auto" />
-        </GameEngine>
-      </TouchableOpacity>
+      <GameEngine
+        systems={[Physics]}
+        entities={gameEntities}
+        running={true}
+      >
+        <StatusBar style="auto" />
+      </GameEngine>
+      {/* <TouchableOpacity style={{ flex: 1 }} activeOpacity={1}>
+        
+      </TouchableOpacity> */}
     </View>
   )
 

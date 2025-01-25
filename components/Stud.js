@@ -19,6 +19,7 @@ const Stud = (props) => {
                 width: width,
                 height: height,
                 backgroundColor: props.color,
+                // display: "none",
             }}
         />
     );
