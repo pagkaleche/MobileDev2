@@ -4,9 +4,9 @@ import { View } from "react-native";
 
 const Circle = (props) => {
     const { body, color } = props;
-    const radius = body.circleRadius; 
-    const x = body.position.x - radius; 
-    const y = body.position.y - radius; 
+    const radius = body.circleRadius;
+    const x = body.position.x - radius;
+    const y = body.position.y - radius;
 
     return (
         <View
@@ -20,17 +20,20 @@ const Circle = (props) => {
                 backgroundColor: color || "pink",
             }}
         />
+
     );
 };
 
 export default (world, color, pos, size) => {
-    const Circle1 = Matter.Bodies.circle(pos.x, pos.y, size.radius, {
-        restitution: 0.7,
-        frictionAir: 0,
-        friction: 0.1,
-        label: "Circle",
-        isStatic: false,
-    });
+    const Circle1 = Matter.Bodies.circle(
+        pos.x, pos.y, size.radius,
+        {
+            restitution: 0,
+            frictionAir: 0,
+            friction: 0,
+            label: "Circle",
+            isStatic: false,
+        });
 
     Matter.World.add(world, Circle1);
 
@@ -39,6 +42,6 @@ export default (world, color, pos, size) => {
         color,
         pos,
         size,
-        renderer: <Circle body={Circle1} color={color} size={size}/>,
+        renderer: <Circle body={Circle1} color={color} size={size} />,
     };
 };

@@ -11,19 +11,6 @@ registerRootComponent(App);
 export default function App() {
   const [gameEntities, setGameEntities] = useState(entities());
 
-  // const handleTouch = () => {
-  //   const newCircle = gameEntities.addCircle();
-
-  //   setGameEntities((prevEntities) => {
-  //     const updatedEntities = {
-  //       ...prevEntities,
-  //       [`Circle_${Date.now()}`]: newCircle,
-  //     };
-  //     console.log(updatedEntities);
-  //     return updatedEntities;
-  //   });
-  // };
-
   return (
     <View style={styles.container}>
       <GameEngine
@@ -33,9 +20,6 @@ export default function App() {
       >
         <StatusBar style="auto" />
       </GameEngine>
-      {/* <TouchableOpacity style={{ flex: 1 }} activeOpacity={1}>
-        
-      </TouchableOpacity> */}
     </View>
   )
 

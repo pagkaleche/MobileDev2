@@ -31,7 +31,7 @@ export default (world, color, pos, size) => {
         size.width,
         size.height,
         { isStatic: true,
-          label: "BottomWall"  
+          label: "TopWall"  
          }
     );
     Matter.World.add(world, wall);
