@@ -5,7 +5,6 @@ import { View } from "react-native";
 const CircleRenderer = (props) => {
     const { body, color } = props;
     const radius = body.circleRadius;
-
     const x = body.position.x - radius;
     const y = body.position.y - radius;
 

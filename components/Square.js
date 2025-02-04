@@ -1,6 +1,6 @@
 import Matter from "matter-js";
 import React from "react";
-import { View, Image } from "react-native";
+import { View } from "react-native";
 
 const Square = (props) => {
     const { body, size, color } = props;

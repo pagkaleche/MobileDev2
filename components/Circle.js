@@ -20,7 +20,6 @@ const Circle = (props) => {
                 backgroundColor: color || "pink",
             }}
         />
-
     );
 };
 
@@ -34,7 +33,6 @@ export default (world, color, pos, size) => {
             label: "Circle",
             isStatic: false,
         });
-
     Matter.World.add(world, Circle1);
 
     return {
