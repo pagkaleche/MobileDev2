@@ -17,7 +17,7 @@ const Name = (props) => {
                 fontWeight: "bold",
             }}
         >
-            Landia
+           Adrian Landia
         </Text>
     );
 };

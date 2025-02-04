@@ -12,7 +12,7 @@ export default (testWorld) => {
     let engine = Matter.Engine.create({ enableSleeping: false });
     let world = engine.world;
 
-    const MyName = Name(world, "black", { x: Constants.WINDOW_WIDTH / 2, y: Constants.WINDOW_HEIGHT - 20 }, { width: 100, height: 100, fontSize: 30 });
+    const MyName = Name(world, "black", { x: Constants.WINDOW_WIDTH / 2 - 50, y: Constants.WINDOW_HEIGHT - 20 }, { width: 100, height: 100, fontSize: 30 });
 
     const Top = TopWall(world, "orange", { x: Constants.WINDOW_WIDTH / 2 - 8, y: 0 }, { width: Constants.WINDOW_WIDTH, height: 20, label: "TopWall" });
     const Middle = TopWall(world, "orange", { x: Constants.WINDOW_WIDTH / 2, y: Constants.WINDOW_HEIGHT / 2 + 80 }, { width: Constants.WINDOW_WIDTH, height: 10, label: "MiddleWall" });
