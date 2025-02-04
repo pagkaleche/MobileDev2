@@ -24,7 +24,7 @@ const TopWall = (props) => {
     );
 };
 
-export default (world, color, pos, size) => {
+export default (world, color, pos, size,) => {
     const wall = Matter.Bodies.rectangle(
         pos.x,
         pos.y,
