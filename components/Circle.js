@@ -29,7 +29,7 @@ export default (world, color, pos, size) => {
         {
             restitution: 0,
             frictionAir: 0,
-            friction: 0,
+            friction: 0.1,
             label: "Circle",
             isStatic: false,
         });

@@ -1,6 +1,6 @@
 import { registerRootComponent } from "expo";
 import { GameEngine } from "react-native-game-engine";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet } from "react-native";
 import entities from "./entities";
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";

@@ -23,6 +23,8 @@ const Name = (props) => {
 };
 
 export default (world, color, pos, size) => {
+    const nameCategory = 0x0004;
+
     const myName = Matter.Bodies.rectangle(
         pos.x,
         pos.y,
@@ -30,10 +32,11 @@ export default (world, color, pos, size) => {
         size.height,
         {
             isStatic: true,
-            label: "Name1",
-            friction: 0,
-            frictionAir: 0,
-            restitution: 0.8,
+            label: "Name",
+            collisionFilter: {
+                category: nameCategory,
+                mask: 0x0001,
+            }
         }
     );
     Matter.World.add(world, myName);

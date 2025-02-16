@@ -28,7 +28,7 @@ export default (world, color, pos, size) => {
         size.width,
         size.height,
         {
-            isStatic: true,
+            isStatic: false,
             label: "Box1",
             friction: 0,
             frictionAir: 0,

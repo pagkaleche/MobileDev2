@@ -25,14 +25,22 @@ const RightWall = (props) => {
 };
 
 export default (world, color, pos, size) => {
+    const RightWallCategory = 0x0003;
+
     const wall = Matter.Bodies.rectangle(
         pos.x,
         pos.y,
         size.width,
         size.height,
-        { isStatic: true,
-          label: "RightWall"  
-         }
+        {
+            isStatic: true,
+            friction: 0.5,
+            label: "RightWall",
+            collisionFilter: {
+                category: RightWallCategory,
+                mask: 0x0001,
+            }
+        }
     );
     Matter.World.add(world, wall);
     return {

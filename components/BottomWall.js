@@ -25,6 +25,8 @@ const BottomWall = (props) => {
 };
 
 export default (world, color, pos, size) => {
+    const bottomWallCategory = 0x0003;
+
     const wall = Matter.Bodies.rectangle(
         pos.x,
         pos.y,
@@ -32,8 +34,12 @@ export default (world, color, pos, size) => {
         size.height,
         {
             isStatic: true,
-            restitution: 2,
-            label: "BottomWall"
+            friction: 0.5,
+            label: "BottomWall",
+            collisionFilter: {
+                category: bottomWallCategory,
+                mask: 0x0001,
+            }
         }
     );
     Matter.World.add(world, wall);

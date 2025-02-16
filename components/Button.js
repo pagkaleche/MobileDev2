@@ -11,15 +11,17 @@ const iconMap = {
 };
 
 const Button = (props) => {
-    const { body, size, color, label, onPress } = props;
+    const { body, size, color, label, onPress, onPressIn, onPressOut } = props;
 
     const x = body.position.x - size.width / 2;
     const y = body.position.y - size.height / 2;
 
     return (
         <TouchableOpacity
-            style={[styles.button, { left: x, top: y, width: size.width, height: size.height, backgroundColor: color || "pink" }]}
+            style={[styles.button, { left: x, top: y, width: size.width, height: size.height, backgroundColor: color || "pink", opacity: 0.1 }]}
             onPress={onPress}
+            onPressIn={onPressIn}
+            onPressOut={onPressOut}
         >
             <Ionicons name={iconMap[label]} size={30} color="white" />
         </TouchableOpacity>
@@ -41,6 +43,8 @@ const styles = StyleSheet.create({
 });
 
 export default (world, color, pos, size, label, onPress) => {
+    const buttonCategory = 0x0004;
+
     const buttonBody = Matter.Bodies.rectangle(
         pos.x,
         pos.y,
@@ -49,6 +53,10 @@ export default (world, color, pos, size, label, onPress) => {
         {
             isStatic: true,
             label: label,
+            collisionFilter: {
+                category: buttonCategory,
+                mask: 0x0001,
+            }
         }
     );
 
