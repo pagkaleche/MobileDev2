@@ -1,6 +1,7 @@
 import Matter from "matter-js";
 import React from "react";
 import { View } from "react-native";
+import { Image } from "react-native";
 
 const IceBlockRenderer = (props) => {
     const { body, size, color } = props;
@@ -8,14 +9,14 @@ const IceBlockRenderer = (props) => {
     const y = body.position.y - size.height / 2;
 
     return (
-        <View
+        <Image
+            source={require('../assets/large_rock.png')}
             style={{
                 position: "absolute",
                 left: x,
                 top: y,
                 width: size.width,
                 height: size.height,
-                backgroundColor: color || "cyan",
             }}
         />
     );

@@ -4,7 +4,7 @@ import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 const iconMap = {
-    up: "arrow-up",
+    jump: "arrow-up",
     down: "arrow-down",
     left: "arrow-back",
     right: "arrow-forward",
@@ -23,7 +23,7 @@ const Button = (props) => {
             onPressIn={onPressIn}
             onPressOut={onPressOut}
         >
-            <Ionicons name={iconMap[label]} size={30} color="white" />
+            <Ionicons name={iconMap[label]} size={30} color="black" />
         </TouchableOpacity>
     );
 };

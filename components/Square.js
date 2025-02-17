@@ -1,6 +1,6 @@
 import Matter from "matter-js";
-import React from "react";
-import { View } from "react-native";
+import React, {useState, useEffect} from "react";
+import { Image as ExpoImage } from "expo-image";
 
 const Square = (props) => {
     const { body, size, color } = props;
@@ -8,15 +8,16 @@ const Square = (props) => {
     const y = body.position.y - size.height / 2;
 
     return (
-        <View
+        <ExpoImage
             style={{
                 position: "absolute",
                 left: x,
                 top: y,
                 width: size.width,
                 height: size.height,
-                backgroundColor: color || "pink",
+                resizeMode: "contain",
             }}
+            source={require('../assets/cat_ani/cat_walk.gif')}
         />
     );
 };
@@ -34,6 +35,13 @@ export default (world, color, pos, size, options = {}) => {
             friction: 0,
             restitution: 0,
             label: options.label || "Square1",
+            render: { 
+                sprite: {
+                    texture: require("../assets/cat_ani/cat_walk.gif"),
+                    xScale: 1,
+                    yScale: 1,
+                },
+             },
             collisionFilter: {
                 category: playerCategory,   
                 mask: 0x0002 | 0x0003,  

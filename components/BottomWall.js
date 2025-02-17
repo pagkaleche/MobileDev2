@@ -1,25 +1,22 @@
 import Matter from "matter-js";
 import React from "react";
-import { View } from "react-native";
+import { Image as ExpoImage } from "expo-image";
 
 const BottomWall = (props) => {
-    const { body } = props;
-    const width = body.bounds.max.x - body.bounds.min.x;
-    const height = body.bounds.max.y - body.bounds.min.y;
-
-    const x = body.position.x - width / 2;
-    const y = body.position.y - height / 2;
-
+    const { body, size } = props;
+    const x = body.position.x - size.width / 2;
+    const y = body.position.y - size.height / 2;
+    
     return (
-        <View
+        <ExpoImage
             style={{
                 position: "absolute",
                 left: x,
                 top: y,
-                width: width,
-                height: height,
-                backgroundColor: props.color,
+                width: size.width,
+                height: size.height,
             }}
+            source={require('../assets/fire2_gif.gif')}
         />
     );
 };
@@ -48,6 +45,6 @@ export default (world, color, pos, size) => {
         color,
         pos,
         size,
-        renderer: <BottomWall />,
+        renderer: <BottomWall body={wall} size={size} />,
     };
 };
