@@ -7,15 +7,18 @@ const Physics = (entities, { time, touches, dispatch, events }) => {
     let engine = entities.physics.engine;
     let delta = time.delta;
     let fixedDelta = Math.min(delta, maxDeltaTime);
+
     let player = entities.Player;
     let platform = entities.Platform;
+    let myScore = entities.ScoreBoard;
     let movementStarted = false;
 
-    engine.world.gravity.y = 0.8;
+    engine.world.gravity.y = 1;
     engine.timing.timeScale = 1;
 
     //reset rigid body position when game restarts
     if (events.some(event => event.type === "game_restart")) {
+        myScore.score = 0;
         Matter.Body.setVelocity(player.body, {
             x: 0,
             y: 0,
@@ -37,7 +40,7 @@ const Physics = (entities, { time, touches, dispatch, events }) => {
             Block5: { x: Constants.WINDOW_WIDTH / 2 - 250, y: -200 },
             Block6: { x: Constants.WINDOW_WIDTH - 400, y: 50 },
         };
-        
+
         Object.values(entities).forEach((entity) => {
             if (entity?.body && blockPositions[entity.body.label]) {
                 Matter.Body.setPosition(entity.body, blockPositions[entity.body.label]);
@@ -131,6 +134,7 @@ const Physics = (entities, { time, touches, dispatch, events }) => {
                 const currentY = entity.body.position.y;
                 const targetY = currentY + 0.25;
                 if (player.body.position.y < 350) {
+                    hasHitThreshold = true;
                     if (currentY < targetY) {
                         const newY = currentY + 0.25;
                         Matter.Body.setPosition(entity.body, { x: entity.body.position.x, y: newY });
@@ -169,6 +173,11 @@ const Physics = (entities, { time, touches, dispatch, events }) => {
             });
         }
     });
+
+    //score logic
+    if (player.body.position.y < 350 && Math.floor(player.body.velocity.y) === -1) {
+        myScore.score += 1;
+    }
 
     //hold logic
     const isTouchInside = (touch, entity) => {
@@ -216,27 +225,6 @@ const Physics = (entities, { time, touches, dispatch, events }) => {
         });
     });
 
-    // events.forEach((event) => {
-    //     if (event.type === 'game_over') {
-
-    //         Matter.Body.setPosition(player.body, {
-    //             x: Constants.WINDOW_WIDTH / 2,
-    //             y: Constants.WINDOW_HEIGHT / 2 + 210,
-    //         });
-
-    //         Matter.Body.setVelocity(player.body, {
-    //             x: 0,
-    //             y: 0,
-    //         });
-
-    //         Matter.Body.setPosition(platform.body, {
-    //             x: Constants.WINDOW_WIDTH / 2,
-    //             y: Constants.WINDOW_HEIGHT - 180,
-    //         });
-    //     }
-    // });
-
-
     Matter.Engine.update(engine, fixedDelta);
     return entities;
 };
@@ -258,7 +246,6 @@ const MoveObject = (direction, Player) => {
             velocity.y = -11.2;
             break;
         case "left":
-
             currentSpeed = Math.max(currentSpeed - acceleration, -maxSpeed);
             velocity.x = currentSpeed;
             break;

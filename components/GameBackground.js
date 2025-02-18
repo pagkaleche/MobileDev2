@@ -16,7 +16,7 @@ const GameBackground = (props) => {
                 width: size.width,
                 height: size.height,
             }}
-            source={require('../assets/Cave1.png')}
+            source={require('../assets/Cave2.png')}
         />
     );
 };

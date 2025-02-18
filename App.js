@@ -14,7 +14,9 @@ export default function App() {
   const [gameOver, setGameOver] = useState(false);
   const gameEngineRef = useRef(null);
 
+
   useEffect(() => {
+
     SplashScreen.preventAutoHideAsync();
     setTimeout(() => {
       SplashScreen.hideAsync();
@@ -54,15 +56,13 @@ export default function App() {
         </View>
       )}
     </View>
-
-  )
-
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "black",
     justifyContent: "center",
     padding: 8,
   },

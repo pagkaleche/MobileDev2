@@ -1,13 +1,14 @@
 import Matter from "matter-js";
 import React from "react";
-import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { TouchableOpacity, StyleSheet } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
 
 const iconMap = {
-    jump: "arrow-up",
-    down: "arrow-down",
-    left: "arrow-back",
-    right: "arrow-forward",
+    jump: "cat",
+    left: "chevron-left-box",
+    right: "chevron-right-box",
 };
 
 const Button = (props) => {
@@ -18,12 +19,12 @@ const Button = (props) => {
 
     return (
         <TouchableOpacity
-            style={[styles.button, { left: x, top: y, width: size.width, height: size.height, backgroundColor: color || "pink", opacity: 0.1 }]}
+            style={[styles.button, { left: x, top: y, width: size.width, height: size.height, backgroundColor: color || "pink", opacity: 0.5 }]}
             onPress={onPress}
             onPressIn={onPressIn}
             onPressOut={onPressOut}
         >
-            <Ionicons name={iconMap[label]} size={30} color="black" />
+            <MaterialCommunityIcons name={iconMap[label]} size={70} color="black" />
         </TouchableOpacity>
     );
 };
