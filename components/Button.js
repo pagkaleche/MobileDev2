@@ -21,7 +21,8 @@ const Button = (props) => {
             style={[styles.button, { left: x, top: y, width: size.width, height: size.height, backgroundColor: color || "pink" }]}
             onPress={onPress}
         >
-            <Ionicons name={iconMap[label]} size={30} color="white" />
+            {/* <Ionicons name={iconMap[label]} size={30} color="white" /> */}
+            <Text style={styles.text}>{label}</Text>
         </TouchableOpacity>
     );
 };

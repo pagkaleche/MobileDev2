@@ -2,13 +2,13 @@ import Matter from "matter-js";
 import React from "react";
 import { View } from "react-native";
 
-const BottomWall = (props) => {
-    const { body } = props;
-    const width = body.bounds.max.x - body.bounds.min.x;
-    const height = body.bounds.max.y - body.bounds.min.y;
+const Wall = (props) => {
+    const {body , size} = props;
 
-    const x = body.position.x - width / 2;
-    const y = body.position.y - height / 2;
+    const width = size.width;
+    const height = size.height;
+    const x = body.position.x - size.width / 2;
+    const y = body.position.y - size.height / 2;
 
     return (
         <View
@@ -30,11 +30,9 @@ export default (world, color, pos, size, label) => {
         pos.y,
         size.width,
         size.height,
-        {
-            isStatic: true,
-            restitution: 2,
-            label: label || "BottomWall"
-        }
+        { isStatic: true,
+          label: label || "Wall"  
+         }
     );
     Matter.World.add(world, wall);
     return {
@@ -42,7 +40,6 @@ export default (world, color, pos, size, label) => {
         color,
         pos,
         size,
-        label,
-        renderer: <BottomWall />,
+        renderer: <Wall/>,
     };
 };

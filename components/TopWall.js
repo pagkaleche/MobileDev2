@@ -24,14 +24,14 @@ const TopWall = (props) => {
     );
 };
 
-export default (world, color, pos, size,) => {
+export default (world, color, pos, size, label) => {
     const wall = Matter.Bodies.rectangle(
         pos.x,
         pos.y,
         size.width,
         size.height,
         { isStatic: true,
-          label: "TopWall"  
+          label: label || "TopWall"  
          }
     );
     Matter.World.add(world, wall);
@@ -40,6 +40,7 @@ export default (world, color, pos, size,) => {
         color,
         pos,
         size,
+        label,
         renderer: <TopWall color={color}/>,
     };
 };
