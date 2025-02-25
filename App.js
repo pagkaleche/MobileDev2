@@ -47,7 +47,7 @@ export default function App() {
       >
         <StatusBar style="auto" />
       </GameEngine>
-      {/* <Text style={styles.scoreText}>
+      <Text style={styles.scoreText}>
         Score: {score}
       </Text>
       <Text style={styles.levelCompleted}>
@@ -60,7 +60,7 @@ export default function App() {
         >
           <Text style={{ color: "white", fontSize: 30 }}>Start Game</Text>
         </TouchableOpacity>
-      )} */}
+      )}
     </View>
   )
 

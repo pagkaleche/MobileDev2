@@ -33,11 +33,11 @@ const Physics = (entities, { time, dispatch }) => {
             if ((bodyA.label === "player" && bodyB.label === "enemy1") ||
                 (bodyA.label === "enemy1" && bodyB.label === "player")
             ) {
-                if (entities["Player"]) {
-                    entities["Player"].color = getRandomColor();
-                    dispatch({ type: "score" });
-                    hasScored = true;
-                }
+                // if (entities["Player"]) {
+                //     entities["Player"].color = getRandomColor();
+                //     dispatch({ type: "score" });
+                //     hasScored = true;
+                // }
 
                 const enemy1 = bodyA.label === "enemy1" ? bodyA : bodyB;
                 const player = bodyA.label === "player" ? bodyA : bodyB;
