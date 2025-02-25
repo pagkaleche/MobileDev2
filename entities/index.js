@@ -17,13 +17,13 @@ export default (testWorld) => {
     const Left = Wall(world, "orange", { x: 0, y: Constants.WINDOW_HEIGHT / 2 }, { width: 20, height: Constants.WINDOW_HEIGHT + 90 }, "LeftWall");
     const Right = Wall(world, "orange", { x: Constants.WINDOW_WIDTH - 15, y: Constants.WINDOW_HEIGHT / 2 }, { width: 20, height: Constants.WINDOW_HEIGHT + 90 }, "RightWall");
     const Enemy1 = Square(world, "green", { x: Constants.WINDOW_WIDTH / 2 - 100, y: Constants.WINDOW_HEIGHT / 2 - 300 }, { width: 30, height: 30 }, { isStatic: true, label: "enemy1" });
-    const Player = Square(world, "blue", { x: Constants.WINDOW_WIDTH / 2, y: Constants.WINDOW_HEIGHT / 2 - 200 }, { width: 15, height: 15 }, { isStatic: false, label: "player" });
-    const Enemy2 = Square(world, "black", { x: Constants.WINDOW_WIDTH / 2 + 100, y: Constants.WINDOW_HEIGHT / 2 - 300 }, { width: 40, height: 80 }, { isStatic: false, label: "enemy2" });
-    const ButtonUp = Button(world, "grey", { x: Constants.WINDOW_WIDTH / 2, y: Constants.WINDOW_HEIGHT - 300 }, { width: 80, height: 50 }, "up", () => moveObject("up"));
-    const ButtonDown = Button(world, "grey", { x: Constants.WINDOW_WIDTH / 2, y: Constants.WINDOW_HEIGHT - 225 }, { width: 80, height: 50 }, "down", () => moveObject("down"));
-    const ButtonLeft = Button(world, "grey", { x: Constants.WINDOW_WIDTH / 2 - 100, y: Constants.WINDOW_HEIGHT - 225 }, { width: 80, height: 50 }, "left", () => moveObject("left"));
-    const ButtonRight = Button(world, "grey", { x: Constants.WINDOW_WIDTH / 2 + 100, y: Constants.WINDOW_HEIGHT - 225 }, { width: 80, height: 50 }, "right", () => moveObject("right"));
-    const Stop = Button(world, "grey", { x: Constants.WINDOW_WIDTH / 2, y: Constants.WINDOW_HEIGHT - 150 }, { width: 80, height: 50 }, "stop", () => moveObject("Stop"));
+    // const Player = Square(world, "blue", { x: Constants.WINDOW_WIDTH / 2, y: Constants.WINDOW_HEIGHT / 2 - 200 }, { width: 15, height: 15 }, { isStatic: false, label: "player" });
+    // const Enemy2 = Square(world, "black", { x: Constants.WINDOW_WIDTH / 2 + 100, y: Constants.WINDOW_HEIGHT / 2 - 300 }, { width: 40, height: 80 }, { isStatic: false, label: "enemy2" });
+    // const ButtonUp = Button(world, "grey", { x: Constants.WINDOW_WIDTH / 2, y: Constants.WINDOW_HEIGHT - 300 }, { width: 80, height: 50 }, "up", () => moveObject("up"));
+    // const ButtonDown = Button(world, "grey", { x: Constants.WINDOW_WIDTH / 2, y: Constants.WINDOW_HEIGHT - 225 }, { width: 80, height: 50 }, "down", () => moveObject("down"));
+    // const ButtonLeft = Button(world, "grey", { x: Constants.WINDOW_WIDTH / 2 - 100, y: Constants.WINDOW_HEIGHT - 225 }, { width: 80, height: 50 }, "left", () => moveObject("left"));
+    // const ButtonRight = Button(world, "grey", { x: Constants.WINDOW_WIDTH / 2 + 100, y: Constants.WINDOW_HEIGHT - 225 }, { width: 80, height: 50 }, "right", () => moveObject("right"));
+    // const Stop = Button(world, "grey", { x: Constants.WINDOW_WIDTH / 2, y: Constants.WINDOW_HEIGHT - 150 }, { width: 80, height: 50 }, "stop", () => moveObject("Stop"));
 
     const speed = 1;
 
@@ -61,13 +61,13 @@ export default (testWorld) => {
         RightWall: Right,
         Middle: Middle,
         Enemy1: Enemy1,
-        Enemy2: Enemy2,
+        // Enemy2: Enemy2,
         Player: Player,
-        ButtonUp: ButtonUp,
-        ButtonDown: ButtonDown,
-        ButtonLeft: ButtonLeft,
-        ButtonRight: ButtonRight,
-        Stop: Stop,
+        // ButtonUp: ButtonUp,
+        // ButtonDown: ButtonDown,
+        // ButtonLeft: ButtonLeft,
+        // ButtonRight: ButtonRight,
+        // Stop: Stop,
         Name: MyName,
     };
 };
