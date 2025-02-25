@@ -1,46 +1,52 @@
 import Matter from "matter-js";
 import React from "react";
-import { View } from "react-native";
+import { View, Image } from "react-native";
 
-const Square = (props) => {
+const MsB = (props) => {
     const { body, size, color } = props;
+
     const x = body.position.x - size.width / 2;
     const y = body.position.y - size.height / 2;
 
     return (
-        <View
+        <Image
+            source={require('../assets/MsB.png')}
             style={{
                 position: "absolute",
                 left: x,
                 top: y,
                 width: size.width,
                 height: size.height,
-                backgroundColor: color || "pink",
             }}
         />
     );
 };
 
-export default (world, color, pos, size, options = {}) => {
-    const Square1 = Matter.Bodies.rectangle(
+export default (world, color, pos, size) => {
+    const MsB1 = Matter.Bodies.rectangle(
         pos.x,
         pos.y,
         size.width,
         size.height,
         {
-            isStatic: options.isStatic || false,
-            label: options.label ||"Square1",
+            isStatic: false,
+            label: "MsB",
             friction: 0,
-            frictionAir: 0,
             restitution: 0,
+            render: {
+                MsB: {
+                    xScale: size.width/100,
+                    yScale: size.height/100
+                }
+            }
         }
     );
-    Matter.World.add(world, Square1);
+    Matter.World.add(world, MsB1);
     return {
-        body: Square1,
+        body: MsB1,
         color,
         pos,
         size,
-        renderer: <Square />
+        renderer: <MsB body={MsB1} color={color} size={size} />
     };
 };

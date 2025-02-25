@@ -10,57 +10,36 @@ registerRootComponent(App);
 
 export default function App() {
   const [gameEntities, setGameEntities] = useState(entities());
-  const [gameStarted, setGameStarted] = useState(false);
+  const [gameStarted, setGameStarted] = useState(true);
   const [levelCompleted, setLevelCompleted] = useState(false);
   const [score, setScore] = useState(0);
 
   useEffect(() => {
-    if (score >= 50) {
+    if (score >= 100) {
       setLevelCompleted(true);
-      setGameStarted(false);
     }
   }, [score]);
-
-  const startGame = () => {
-    setGameStarted(true);
-    setScore(0);
-  };
-
-  const handleGameOver = () => {
-    setGameStarted(false);
-  };
 
   return (
     <View style={styles.container}>
       <GameEngine
         systems={[Physics]}
         entities={gameEntities}
-        running={gameStarted}
+        running={true}
         onEvent={(e) => {
-          if (e.type === "gameOver") {
-            handleGameOver();
-          }
           if (e.type === "score") {
-            setScore(score + 10);
+            setScore(score + 50);
           }
         }}
       >
         <StatusBar style="auto" />
       </GameEngine>
-      {/* <Text style={styles.scoreText}>
+      <Text style={styles.levelCompleted}>
+        {levelCompleted && "Great! Game Completed!"}
+      </Text>
+      <Text style={styles.scoreText}>
         Score: {score}
       </Text>
-      <Text style={styles.levelCompleted}>
-        {levelCompleted && "Great! Level 1 completed"}
-      </Text>
-      {!gameStarted && (
-        <TouchableOpacity
-          style={styles.startButton}
-          onPress={startGame}
-        >
-          <Text style={{ color: "white", fontSize: 30 }}>Start Game</Text>
-        </TouchableOpacity>
-      )} */}
     </View>
   )
 
