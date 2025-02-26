@@ -2,7 +2,7 @@ import Matter from "matter-js";
 import React from "react";
 import { Image as ExpoImage } from "expo-image";
 
-const BottomWall = (props) => {
+const Wall = (props) => {
     const { body, size } = props;
     const x = body.position.x - size.width / 2;
     const y = body.position.y - size.height / 2;
@@ -22,7 +22,7 @@ const BottomWall = (props) => {
 };
 
 export default (world, color, pos, size) => {
-    const bottomWallCategory = 0x0003;
+    const wallCategory = 0x0003;
 
     const wall = Matter.Bodies.rectangle(
         pos.x,
@@ -32,9 +32,9 @@ export default (world, color, pos, size) => {
         {
             isStatic: true,
             friction: 0.5,
-            label: "BottomWall",
+            label: "Wall",
             collisionFilter: {
-                category: bottomWallCategory,
+                category: wallCategory,
                 mask: 0x0001,
             }
         }
@@ -45,6 +45,6 @@ export default (world, color, pos, size) => {
         color,
         pos,
         size,
-        renderer: <BottomWall body={wall} size={size} />,
+        renderer: <Wall body={wall} size={size} />,
     };
 };

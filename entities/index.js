@@ -1,23 +1,21 @@
 import Matter from "matter-js";
 import GameBackground from "../components/GameBackground";
-import BottomWall from "../components/BottomWall";
+import Wall from "../components/Wall";
 import Platform from "../components/Platform";
 import Constants from "../constants";
 import CreateIceBlock from "../components/IceBlock";
 import CreatePlayer from "../components/Player";
 import Button from "../components/Button";
 import Score from "../components/Score";
-// import Name from "../components/Name";
 import { MoveObject } from "../Physics";
 
 export default () => {
     let engine = Matter.Engine.create({ enableSleeping: false });
     let world = engine.world;
 
-    // const MyName = Name(world, "black", { x: Constants.WINDOW_WIDTH / 2 - 50, y: Constants.WINDOW_HEIGHT - 60 }, { width: 100, height: 100, fontSize: 30 });
     const BackGround = GameBackground(world, "black", { x: Constants.WINDOW_WIDTH / 2 - 8, y: Constants.WINDOW_HEIGHT / 2 - 133 }, { width: Constants.WINDOW_WIDTH, height: Constants.WINDOW_HEIGHT, label: "GameBackground" });
     const Wood = Platform(world, { x: Constants.WINDOW_WIDTH / 2, y: Constants.WINDOW_HEIGHT - 180 }, { width: 80, height: 13 }, "Platform");
-    const Bottom = BottomWall(world, "orange", { x: Constants.WINDOW_WIDTH / 2 - 8, y: Constants.WINDOW_HEIGHT - 150 }, { width: Constants.WINDOW_WIDTH, height: 30, label: "BottomWall" });
+    const Bottom = Wall(world, "orange", { x: Constants.WINDOW_WIDTH / 2 - 8, y: Constants.WINDOW_HEIGHT - 150 }, { width: Constants.WINDOW_WIDTH, height: 30, label: "BottomWall" });
     const IceBlock1 = CreateIceBlock(world, "blue", { x: Constants.WINDOW_WIDTH / 2 - 150, y: 550 }, { width: 155, height: 30 }, "Block1");
     const IceBlock2 = CreateIceBlock(world, "blue", { x: Constants.WINDOW_WIDTH / 2 + 150, y: 400 }, { width: 155, height: 30 }, "Block2");
     const IceBlock3 = CreateIceBlock(world, "blue", { x: Constants.WINDOW_WIDTH / 2 - 90, y: 250 }, { width: 155, height: 30 }, "Block3");
@@ -49,6 +47,5 @@ export default () => {
         ButtonLeft: ButtonLeft,
         ButtonRight: ButtonRight,
         JumpButton: JumpButton,
-        // Name: MyName,
     };
 };

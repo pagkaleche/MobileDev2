@@ -1,6 +1,6 @@
 import { registerRootComponent } from "expo";
 import { GameEngine } from "react-native-game-engine";
-import { View, StyleSheet, Text, Button } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import entities from "./entities";
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from "expo-status-bar";
@@ -11,6 +11,7 @@ registerRootComponent(App);
 
 export default function App() {
   const [gameEntities, setGameEntities] = useState(entities());
+  const [gameRunning, setGameRunning] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const gameEngineRef = useRef(null);
 
@@ -23,14 +24,21 @@ export default function App() {
     }, 2000);
   }, []);
 
+  const startGame = () => {
+    setGameRunning(true);
+    gameEngineRef.current.dispatch({ type: "game_start" });
+  };
+
   const restartGame = () => {
     setGameOver(false);
+    setGameRunning(true);
     gameEngineRef.current.dispatch({ type: "game_restart" });
   };
 
   const handleEvent = useCallback((e) => {
     if (e.type === "game_over") {
       setGameOver(true);
+      setGameRunning(false);
     } else if (e.type === "game_start") {
     }
   }, []);
@@ -41,19 +49,24 @@ export default function App() {
         ref={gameEngineRef}
         systems={[Physics]}
         entities={gameEntities}
-        running={!gameOver}
+        running={gameRunning}
         onEvent={handleEvent}
         setGameOver={setGameOver}
       >
         <StatusBar style="auto" />
       </GameEngine>
+      {!gameRunning && !gameOver && (
+        <TouchableOpacity style={styles.startGame} onPress={startGame}>
+          <Text style={styles.startGameText}>Start Game</Text>
+        </TouchableOpacity>
+      )}
       {gameOver && (
-        <View style={styles.overlay}>
-          <View style={styles.gameOverContainer}>
-            <Text style={styles.gameOverText}>Roasted Cat!</Text>
-            <Button title="Restart" onPress={restartGame} />
-          </View>
-        </View>
+        <>
+        <Text style={styles.gameOverText}>Roasted Cat!</Text>
+        <TouchableOpacity style={styles.gameOver} onPress={restartGame}>
+          <Text style={styles.restartText}>Restart</Text>
+        </TouchableOpacity>
+        </>
       )}
     </View>
   );
@@ -80,9 +93,47 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
+  gameOver: {
+    position: "absolute",
+    top: "50%",
+    left: "55%",
+    transform: [{ translateX: -50 }, { translateY: -50 }],
+    //red background color looks too bright, give me a lighter shade of red
+    backgroundColor: "rgb(117, 44, 44)",
+    padding: 10,
+    borderRadius: 10,
+  },
   gameOverText: {
     fontSize: 52,
-    color: "#fff",
+    fontWeight: "bold",
+    position: "absolute",
+    top: "35%",
+    left: "25%",
+    color: "orange",
     marginBottom: 20,
+  },
+  restartText: {
+    // color: "#fff",
+    //rgb color that blends well with red
+    color: "rgb(255, 255, 255)",
+    fontSize: 30,
+  },
+  startGame: {
+    fontSize: 52,
+    position: "absolute",
+    top: "50%",
+    left: "40%",
+    transform: [{ translateX: -50 }, { translateY: -50 }],
+    backgroundColor: "orange",
+    padding: 20,
+    borderRadius: 10,
+  },
+  startGameText: {
+    color: "#fff",
+    fontSize: 40,
+  },
+  button: {
+    backgroundColor: "blue",
+    padding: 40,
   },
 });

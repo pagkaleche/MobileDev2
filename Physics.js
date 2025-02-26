@@ -2,6 +2,7 @@ import Matter from "matter-js";
 import Constants from "./constants";
 
 const maxDeltaTime = 16;
+let hasScored = false;
 
 const Physics = (entities, { time, touches, dispatch, events }) => {
     let engine = entities.physics.engine;
@@ -11,8 +12,8 @@ const Physics = (entities, { time, touches, dispatch, events }) => {
     let player = entities.Player;
     let platform = entities.Platform;
     let myScore = entities.ScoreBoard;
+    
     let movementStarted = false;
-
     engine.world.gravity.y = 1;
     engine.timing.timeScale = 1;
 
@@ -175,9 +176,14 @@ const Physics = (entities, { time, touches, dispatch, events }) => {
     });
 
     //score logic
-    if (player.body.position.y < 350 && Math.floor(player.body.velocity.y) === -1) {
+    if (!hasScored && player.body.position.y < 350 && Math.floor(player.body.velocity.y) === -1) {
+        hasScored = true;
         myScore.score += 1;
-    }
+    };
+
+    if(player.body.position.y > 350 && hasScored) {
+        hasScored = false;
+    };
 
     //hold logic
     const isTouchInside = (touch, entity) => {
@@ -218,7 +224,7 @@ const Physics = (entities, { time, touches, dispatch, events }) => {
 
             }
 
-            if ((bodyA.label === "Player" && bodyB.label === "BottomWall" || bodyA.label === "BottomWall" && bodyB.label === "Player")) {
+            if ((bodyA.label === "Player" && bodyB.label === "Wall" || bodyA.label === "Wall" && bodyB.label === "Player")) {
                 movementStarted = false;
                 dispatch({ type: "game_over" });
             }
@@ -243,7 +249,7 @@ const MoveObject = (direction, Player) => {
     switch (direction) {
         case "jump":
             if (!isPlayerOnGround(Player)) return;
-            velocity.y = -11.2;
+            velocity.y = -12;
             break;
         case "left":
             currentSpeed = Math.max(currentSpeed - acceleration, -maxSpeed);
