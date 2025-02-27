@@ -1,4 +1,4 @@
-import Matter from "matter-js";
+import Matter, { Engine } from "matter-js";
 import React, { useState, useEffect, useRef } from "react";
 import { Image as ExpoImage } from "expo-image";
 
@@ -14,6 +14,10 @@ const WALK_RIGHT = [
     require("../assets/cat_ani/right/2.png"),
     require("../assets/cat_ani/right/3.png"),
     require("../assets/cat_ani/right/4.png"),
+];
+
+const DEAD = [
+    require("../assets/cat_ani/dead.png"),
 ];
 
 const CreatePlayer = (props) => {
@@ -45,6 +49,7 @@ const CreatePlayer = (props) => {
                 setIsMoving(false);
             }
 
+
             prevXRef.current = body.position.x;
             frameTimer = requestAnimationFrame(updateFrame);
         };
@@ -54,11 +59,11 @@ const CreatePlayer = (props) => {
         return () => cancelAnimationFrame(frameTimer);
     }, [body.position.x]);
 
-
     const x = body.position.x - size.width / 2;
     const y = body.position.y - size.height / 2;
 
     const selectedFrames = direction === "right" ? WALK_RIGHT : WALK_LEFT;
+    const imageSource = isMoving ? selectedFrames[frameIndex] : selectedFrames[0];
 
     return (
         <ExpoImage
@@ -70,7 +75,7 @@ const CreatePlayer = (props) => {
                 height: size.height,
                 contentFit: "cover",
             }}
-            source={isMoving ? selectedFrames[frameIndex] : selectedFrames[0]}
+            source={imageSource}
         />
     );
 };
@@ -115,7 +120,7 @@ export default (world, pos, size, options = {}) => {
         size,
         score,
         updateScore,
-        renderer: <CreatePlayer body={Square1} size={size} />,
+        renderer: <CreatePlayer body={Square1} size={size} events={events} />,
     };
 };
 

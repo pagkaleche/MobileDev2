@@ -13,11 +13,11 @@ export default function App() {
   const [gameEntities, setGameEntities] = useState(entities());
   const [gameRunning, setGameRunning] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  const [gameEvent, setGameEvent] = useState(null);
   const gameEngineRef = useRef(null);
 
 
   useEffect(() => {
-
     SplashScreen.preventAutoHideAsync();
     setTimeout(() => {
       SplashScreen.hideAsync();
@@ -40,7 +40,17 @@ export default function App() {
       setGameOver(true);
       setGameRunning(false);
     } else if (e.type === "game_start") {
+      setGameOver(false);
+      setGameRunning(true);
     }
+
+    setGameEntities((prevEntities) => ({
+      ...prevEntities,
+      Player: {
+        ...prevEntities.Player,
+        events: e,
+      },
+    }));
   }, []);
 
   return (
@@ -62,10 +72,10 @@ export default function App() {
       )}
       {gameOver && (
         <>
-        <Text style={styles.gameOverText}>Roasted Cat!</Text>
-        <TouchableOpacity style={styles.gameOver} onPress={restartGame}>
-          <Text style={styles.restartText}>Restart</Text>
-        </TouchableOpacity>
+          <Text style={styles.gameOverText}>Roasted Cat!</Text>
+          <TouchableOpacity style={styles.gameOver} onPress={restartGame}>
+            <Text style={styles.restartText}>Restart</Text>
+          </TouchableOpacity>
         </>
       )}
     </View>
@@ -98,7 +108,6 @@ const styles = StyleSheet.create({
     top: "50%",
     left: "55%",
     transform: [{ translateX: -50 }, { translateY: -50 }],
-    //red background color looks too bright, give me a lighter shade of red
     backgroundColor: "rgb(117, 44, 44)",
     padding: 10,
     borderRadius: 10,
@@ -113,8 +122,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   restartText: {
-    // color: "#fff",
-    //rgb color that blends well with red
     color: "rgb(255, 255, 255)",
     fontSize: 30,
   },
